@@ -1,0 +1,15 @@
+{
+  "name": "data_collection",
+  "version": "1.0.0",
+  "description": "Node.js server for collecting links to sneaker images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luke Sutor",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs": "0.0.0",
+    "sneaks-api": "^1.2.3"
+  }
+}
