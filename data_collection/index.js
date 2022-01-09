@@ -1,17 +1,23 @@
 const SneaksAPI = require('sneaks-api');
+const fs = require('fs')
+
 const sneaks = new SneaksAPI();
 
-//getProducts(keyword, limit, callback) takes in a keyword and limit and returns a product array 
-sneaks.getProducts("Yeezy Cinder", 10, function (err, products) {
-    console.log(products)
-})
+const terms = ["nike", "jordan", 'adidas', 'reebok', 'new balance', 'yeezy', 'vans', 'converse', 'puma', 'balenciaga', 'fila', 'under armour',
+    'gucci', 'asics', 'off-white', 'fear of god', 'golden goose', 'keds', 'shoe']
 
-//Product object includes styleID where you input it in the getProductPrices function
-//getProductPrices(styleID, callback) takes in a style ID and returns sneaker info including a price map and more images of the product
-sneaks.getProductPrices("FY2903", function (err, product) {
-    console.log(product)
-})
-//getMostPopular(limit, callback) takes in a limit and returns an array of the current popular products curated by StockX
-sneaks.getMostPopular(10, function (err, products) {
-    console.log(products)
-})
+function getProducts(term) {
+    let all_products = ""
+    sneaks.getProducts(term, 10000, function (err, products) {
+        for (let j in products) {
+            all_products += term + " // " + j + " -- " + products[j].thumbnail + '\n'
+        }
+        fs.appendFile('sneaker_links.txt', all_products, err => {
+            if (err) {
+                console.error(err)
+            }
+        })
+    })
+}
+
+getProducts('shoe')
