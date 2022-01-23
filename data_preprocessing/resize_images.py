@@ -1,8 +1,7 @@
 import os
-import cv2
 from PIL import Image
 
-root = '../images'
+root = 'images/fullsize_square'
 
 corrupted = []
 
@@ -12,8 +11,10 @@ for file in os.listdir(root):
         try:
             with open(dir, "rb") as f:
                 image = Image.open(f)
-                if(image.size != (1400, 1000)):
-                    print(dir)
-                    print(image.size)
+
+                result = image.resize((256, 256))
+                result.save(f"images/256/{file}")
         except:
-            corrupted.append(file)
+            pass
+
+print("DONE")
